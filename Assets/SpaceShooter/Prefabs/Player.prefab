@@ -179,7 +179,7 @@ Transform:
   m_GameObject: {fileID: 6142326650305748594}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: -1}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -227,3 +227,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerProperties: {fileID: 11400000, guid: eed4b31dd7e519142ac9a1a1de0edb10, type: 2}
   myRigidbody2D: {fileID: 1849126840625559129}
+  playerShipModel: {fileID: 4630938760217186987}
