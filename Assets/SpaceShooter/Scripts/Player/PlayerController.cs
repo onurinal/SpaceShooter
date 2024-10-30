@@ -7,20 +7,18 @@ namespace SpaceShooter.Player
         [SerializeField] private PlayerProperties playerProperties;
         [SerializeField] private Rigidbody2D myRigidbody2D;
         [SerializeField] private Transform playerShipModel;
+        [SerializeField] private Transform leftLaserSpawnPosition;
+        [SerializeField] private Transform rightLaserSpawnPosition;
+
 
         private Camera mainCamera;
 
-        // to not go offscreen
         private Vector3 topRightBorder;
         private Vector3 bottomLeftBorder;
-        private float minMaxMovementX;
-        private float minMaxMovementY;
 
-        // FOR MOVEMENT
-        private Vector3 previousTouchPosition;
+        // for movement
         private Vector3 currentTouchPosition;
-        private Vector3 direction;
-        private Vector3 targetPosition;
+        private Vector3 previousTouchPosition;
 
         public void Initialize()
         {
@@ -34,29 +32,36 @@ namespace SpaceShooter.Player
 
         private void Update()
         {
-            MoveShipWithTouch();
+            MoveShip();
         }
 
-        private void FixedUpdate()
+        private void MoveShip()
         {
-            MoveShipWithKeyboard();
+            // use touch or mouse movement if no keyboard input detected
+            if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
+            {
+                MoveShipWithTouch();
+            }
+            else
+            {
+                MoveShipWithKeyboard();
+            }
         }
 
         private void MoveShipWithTouch()
         {
 #if UNITY_EDITOR
-            if (Input.GetMouseButton(0))
+            currentTouchPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            currentTouchPosition.z = 0f;
+            if (Input.GetMouseButton(0)) // Check if the left mouse button is held down
             {
-                previousTouchPosition = currentTouchPosition;
-                currentTouchPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-                currentTouchPosition.z = 0f;
-                direction = currentTouchPosition - previousTouchPosition;
-                direction.Normalize();
-                targetPosition = transform.position + direction;
+                var direction = currentTouchPosition - previousTouchPosition;
+                var targetPosition = transform.position + direction * (playerProperties.playerMouseMoveSpeed * Time.deltaTime);
                 targetPosition = ClampShipToScreen(targetPosition);
-                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * playerProperties.playerTouchMoveSpeed);
+                transform.position = targetPosition;
             }
 
+            previousTouchPosition = currentTouchPosition;
 #else
             if (Input.touchCount > 0)
             {
@@ -64,15 +69,17 @@ namespace SpaceShooter.Player
                 var touchPosition = mainCamera.ScreenToWorldPoint(touch.position);
                 touchPosition.z = 0f;
 
-                if (touch.phase == TouchPhase.Moved)
+                if (touch.phase == TouchPhase.Began)
                 {
-                    previousTouchPosition = currentTouchPosition;
-                    currentTouchPosition = touchPosition;
-                    direction = currentTouchPosition - previousTouchPosition;
-                    direction.Normalize();
-                    targetPosition = transform.position + direction;
+                    previousTouchPosition = touchPosition;
+                }
+                else if (touch.phase == TouchPhase.Moved)
+                {
+                    var direction = touchPosition - previousTouchPosition;
+                    var targetPosition = transform.position + direction * (Time.deltaTime * playerProperties.playerTouchMoveSpeed);
                     targetPosition = ClampShipToScreen(targetPosition);
-                    transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * playerProperties.playerTouchMoveSpeed);
+                    transform.position = targetPosition;
+                    previousTouchPosition = touchPosition;
                 }
             }
 #endif
@@ -80,23 +87,17 @@ namespace SpaceShooter.Player
 
         private void MoveShipWithKeyboard()
         {
-            direction = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0f);
-            if (direction != Vector3.zero)
-            {
-                myRigidbody2D.velocity = direction * playerProperties.playerKeyboardMoveSpeed;
-                transform.position = ClampShipToScreen(transform.position);
-            }
-            else
-            {
-                myRigidbody2D.velocity = Vector3.zero;
-            }
+            var direction = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0f).normalized;
+            var targetPosition = transform.position + direction * (Time.deltaTime * playerProperties.playerKeyboardMoveSpeed);
+            targetPosition = ClampShipToScreen(targetPosition);
+            transform.position = targetPosition;
         }
 
         private Vector3 ClampShipToScreen(Vector3 position)
         {
-            minMaxMovementX = Mathf.Clamp(position.x, bottomLeftBorder.x + playerShipModel.localScale.x / 2, topRightBorder.x - playerShipModel.localScale.x / 2);
-            minMaxMovementY = Mathf.Clamp(position.y, bottomLeftBorder.y + playerShipModel.localScale.y / 2, topRightBorder.y - playerShipModel.localScale.y / 2);
-            return new Vector3(minMaxMovementX, minMaxMovementY, 0f);
+            var clampedX = Mathf.Clamp(position.x, bottomLeftBorder.x + playerShipModel.localScale.x / 2, topRightBorder.x - playerShipModel.localScale.x / 2);
+            var clampedY = Mathf.Clamp(position.y, bottomLeftBorder.y + playerShipModel.localScale.y / 2, topRightBorder.y - playerShipModel.localScale.y / 2);
+            return new Vector3(clampedX, clampedY, 0f);
         }
     }
 }

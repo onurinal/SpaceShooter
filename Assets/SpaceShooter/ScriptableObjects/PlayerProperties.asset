@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63d3c3439384858a28b90dd886ae422, type: 3}
   m_Name: PlayerProperties
   m_EditorClassIdentifier: 
-  playerTouchMoveSpeed: 12
-  playerKeyboardMoveSpeed: 7
-  playerSpawnPosition: {x: 0, y: -3, z: 0}
+  playerTouchMoveSpeed: 90
+  playerKeyboardMoveSpeed: 10
+  playerSpawnPosition: {x: 0, y: 0, z: 0}

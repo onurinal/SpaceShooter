@@ -26,6 +26,7 @@ namespace SpaceShooter.Manager
 
         private void Start()
         {
+            Application.targetFrameRate = 90;
             CreateNewShip();
             playerController.Initialize();
         }
