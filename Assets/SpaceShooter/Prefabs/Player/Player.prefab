@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2553122102503549160}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.465, y: 0.075, z: 0}
+  m_LocalPosition: {x: -0.465, y: 0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -261,8 +261,8 @@ MonoBehaviour:
   playerProperties: {fileID: 11400000, guid: eed4b31dd7e519142ac9a1a1de0edb10, type: 2}
   playerRigidbody2D: {fileID: 1849126840625559129}
   playerShipModel: {fileID: 4630938760217186987}
-  leftLaserSpawnPosition: {fileID: 8413932676384223685}
-  rightLaserSpawnPosition: {fileID: 1695072794755213361}
+  leftLaserSpawnTransform: {fileID: 8413932676384223685}
+  rightLaserSpawnTransform: {fileID: 1695072794755213361}
 --- !u!1 &6855886754747615066
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +288,7 @@ Transform:
   m_GameObject: {fileID: 6855886754747615066}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.465, y: 0.075, z: 0}
+  m_LocalPosition: {x: 0.465, y: 0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

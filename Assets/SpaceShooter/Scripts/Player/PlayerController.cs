@@ -9,16 +9,13 @@ namespace SpaceShooter.Player
         [SerializeField] private Rigidbody2D playerRigidbody2D;
         [SerializeField] private Transform playerShipModel;
 
-        [SerializeField] private Transform leftLaserSpawnPosition;
-        [SerializeField] private Transform rightLaserSpawnPosition;
+        [SerializeField] private Transform leftLaserSpawnTransform, rightLaserSpawnTransform;
 
         private Camera mainCamera;
-        private Vector3 topRightBorder;
-        private Vector3 bottomLeftBorder;
+        private Vector3 topRightBorder, bottomLeftBorder;
 
         // for movement
-        private Vector3 currentTouchPosition;
-        private Vector3 previousTouchPosition;
+        private Vector3 currentTouchPosition, previousTouchPosition;
 
         public void Initialize()
         {
@@ -112,7 +109,7 @@ namespace SpaceShooter.Player
         // -------------------- SET UP LASER -------------------
         private void InitializeLaser()
         {
-            LaserManager.Instance.Initialize(leftLaserSpawnPosition, rightLaserSpawnPosition);
+            LaserManager.Instance.Initialize(leftLaserSpawnTransform, rightLaserSpawnTransform);
             LaserManager.Instance.StartFireLaser();
         }
     }

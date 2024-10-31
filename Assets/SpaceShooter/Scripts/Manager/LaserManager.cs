@@ -8,8 +8,7 @@ namespace SpaceShooter.Manager
     {
         [SerializeField] private LaserProperties laserProperties;
         [SerializeField] private Laser initialLaserPrefab;
-        private Transform leftLaserSpawnPosition;
-        private Transform rightLaserSpawnPosition;
+        private Transform leftLaserSpawnTransform, rightLaserSpawnTransform;
         private IEnumerator laserCoroutine;
         private bool isFiring;
 
@@ -28,15 +27,15 @@ namespace SpaceShooter.Manager
             }
         }
 
-        public void Initialize(Transform leftLaserSpawnPosition, Transform rightLaserSpawnPosition)
+        public void Initialize(Transform leftLaserSpawnTransform, Transform rightLaserSpawnTransform)
         {
-            if (leftLaserSpawnPosition == null || rightLaserSpawnPosition == null)
+            if (leftLaserSpawnTransform == null || rightLaserSpawnTransform == null)
             {
                 Debug.LogError("Laser spawn positions cannot be null before initializing!");
             }
 
-            this.leftLaserSpawnPosition = leftLaserSpawnPosition;
-            this.rightLaserSpawnPosition = rightLaserSpawnPosition;
+            this.leftLaserSpawnTransform = leftLaserSpawnTransform;
+            this.rightLaserSpawnTransform = rightLaserSpawnTransform;
         }
 
         private IEnumerator FireLaser()
@@ -44,8 +43,8 @@ namespace SpaceShooter.Manager
             isFiring = true;
             while (isFiring)
             {
-                var leftLaser = Instantiate(initialLaserPrefab, leftLaserSpawnPosition.position, Quaternion.identity);
-                var rightLaser = Instantiate(initialLaserPrefab, rightLaserSpawnPosition.position, Quaternion.identity);
+                var leftLaser = Instantiate(initialLaserPrefab, leftLaserSpawnTransform.position, Quaternion.identity);
+                var rightLaser = Instantiate(initialLaserPrefab, rightLaserSpawnTransform.position, Quaternion.identity);
                 yield return new WaitForSeconds(laserProperties.fireInterval);
             }
         }
