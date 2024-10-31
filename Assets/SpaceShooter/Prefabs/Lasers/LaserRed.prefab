@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3675009005795409610}
   - component: {fileID: 1106298043194830753}
-  m_Layer: 0
+  - component: {fileID: 3676612574105965685}
+  m_Layer: 7
   m_Name: LaserRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +48,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -59,7 +60,21 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5
+--- !u!114 &3676612574105965685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32051818003468779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2f48502a6dd487fb90a27c0ed9bf8bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserProperties: {fileID: 11400000, guid: c04735e183509444db6701238d5a2737, type: 2}
+  laserRigidbody2D: {fileID: 1106298043194830753}
 --- !u!1 &5675386898779134378
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,7 +86,7 @@ GameObject:
   - component: {fileID: 1268402143819777104}
   - component: {fileID: 6386001269408288609}
   - component: {fileID: 6287275116836865272}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LaserRed Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +103,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.55, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.45, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3675009005795409610}

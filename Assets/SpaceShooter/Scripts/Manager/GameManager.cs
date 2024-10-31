@@ -16,17 +16,18 @@ namespace SpaceShooter.Manager
         {
             if (Instance != null && Instance != this)
             {
-                Destroy(this.gameObject);
+                Destroy(gameObject);
             }
             else
             {
                 Instance = this;
             }
+
+            Application.targetFrameRate = 60;
         }
 
         private void Start()
         {
-            Application.targetFrameRate = 90;
             CreateNewShip();
             playerController.Initialize();
         }
