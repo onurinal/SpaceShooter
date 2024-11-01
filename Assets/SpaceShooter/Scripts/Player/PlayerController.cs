@@ -14,7 +14,7 @@ namespace SpaceShooter.Player
         private Camera mainCamera;
         private Vector3 topRightBorder, bottomLeftBorder;
 
-        // for movement
+        // for movement 
         private Vector3 currentTouchPosition, previousTouchPosition;
 
         public void Initialize()
