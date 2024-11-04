@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Wave 1
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1340992586651189330, guid: 9bb858f5409c5d1489b4aa71ad97ac05, type: 3}
-  enemyPath: {fileID: 8794065778681695409, guid: 8ed3da14a37542a42ba3a12341ccbd94, type: 3}
-  enemyMoveSpeed: 5
+  enemyMoveSpeed: 2
+  minEnemyWaypoints: 5
+  maxEnemyWaypoints: 8

@@ -10,7 +10,6 @@ namespace SpaceShooter.Lasers
         private void Start()
         {
             laserRigidbody2D.velocity = laserProperties.speed;
-            // Destroy(gameObject, 1f);
         }
     }
 }

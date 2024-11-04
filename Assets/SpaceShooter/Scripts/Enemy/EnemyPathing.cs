@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SpaceShooter.Enemy
@@ -7,52 +8,60 @@ namespace SpaceShooter.Enemy
     {
         [SerializeField] private EnemyWaveProperties enemyWave;
 
-        // waypoints for pathing
-        private readonly List<Transform> enemyWaypoints = new List<Transform>();
-        private int currentWaypointIndex;
+        public List<Vector3> waypoints = new List<Vector3>();
+        private IEnumerator enemyPathingCoroutine;
+        private int currentWaypointIndex = 0;
 
         private void Start()
         {
             InitializeWaypoints();
-            SpawnEnemy();
+            StartEnemyPathing();
         }
 
-        // will do another script to instantiate enemies
-        private void SpawnEnemy()
+        private IEnumerator MoveEnemyPathing()
         {
-            transform.position = enemyWaypoints[currentWaypointIndex].position;
-        }
-
-        private void Update()
-        {
-            MoveAlongPath();
-        }
-
-        private void MoveAlongPath()
-        {
-            if (currentWaypointIndex < enemyWaypoints.Count)
+            while (currentWaypointIndex < waypoints.Count)
             {
-                var targetPosition = enemyWaypoints[currentWaypointIndex].position;
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * enemyWave.enemyMoveSpeed);
-                if (transform.position == targetPosition)
-                {
-                    currentWaypointIndex++;
-                }
+                MoveTowardsNextWaypoint();
+                yield return null;
             }
 
-            if (currentWaypointIndex == enemyWaypoints.Count)
+            StopEnemyPathing();
+        }
+
+        private void MoveTowardsNextWaypoint()
+        {
+            var targetPosition = waypoints[currentWaypointIndex];
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * enemyWave.enemyMoveSpeed);
+            if (transform.position == targetPosition)
             {
+                currentWaypointIndex++;
+            }
+        }
+
+        private void StartEnemyPathing()
+        {
+            if (enemyPathingCoroutine == null)
+            {
+                enemyPathingCoroutine = MoveEnemyPathing();
+                StartCoroutine(enemyPathingCoroutine);
+            }
+        }
+
+        private void StopEnemyPathing()
+        {
+            if (enemyPathingCoroutine != null)
+            {
+                StopCoroutine(enemyPathingCoroutine);
+                enemyPathingCoroutine = null;
                 Destroy(gameObject);
             }
         }
 
         private void InitializeWaypoints()
         {
-            var waypointCount = enemyWave.enemyPath.childCount;
-            for (var i = 0; i < waypointCount; i++)
-            {
-                enemyWaypoints.Add(enemyWave.enemyPath.GetChild(i).transform);
-            }
+            var enemySpawner = EnemySpawner.Instance;
+            waypoints = enemySpawner.TakeWaypoints();
         }
     }
 }
