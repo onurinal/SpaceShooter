@@ -1,22 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using SpaceShooter.Manager;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace SpaceShooter.Enemy
 {
     public class EnemySpawner : MonoBehaviour
 
     {
-        [SerializeField] private EnemyWaveProperties enemyWaveProperties;
-        [SerializeField] private List<GameObject> enemyList;
-        private readonly List<Vector3> enemyPathWaypoints = new List<Vector3>();
-        [SerializeField] private int minEnemies = 4;
-        [SerializeField] private int maxEnemies = 7;
-
-        private Vector3 topRightBorder, bottomLeftBorder;
+        [SerializeField] private List<EnemyWave> enemyWave;
         private IEnumerator enemySpawnCoroutine;
+
+
+        private IEnumerator enemyWaveCoroutine; // to manage wave coroutines
+        private bool isLastEnemyOfWavePathing;
 
         public static EnemySpawner Instance;
 
@@ -34,38 +30,27 @@ namespace SpaceShooter.Enemy
 
         private void Start()
         {
-            InitializeBorders();
-            StartEnemySpawn();
+            StartSpawnWaves();
         }
 
-        private void InitializeBorders()
+        private IEnumerator SpawnAllEnemies(EnemyWave enemyWave)
         {
-            var spaceManager = SpaceManager.Instance;
-            spaceManager.InitializeBorders();
-            bottomLeftBorder = spaceManager.bottomLeftBorder;
-            topRightBorder = spaceManager.topRightBorder;
-        }
-
-        private IEnumerator EnemySpawn()
-        {
-            InitializeWaypoints();
-            var enemyCount = Random.Range(minEnemies, maxEnemies + 1);
-
-            for (var i = 0; i < enemyCount; i++)
+            var enemySpawnPosition = enemyWave.InitializeWaypoints()[0];
+            for (var i = 0; i < enemyWave.GetNumberOfEnemies(); i++)
             {
-                var enemy = Instantiate(enemyList[0], enemyPathWaypoints[0], Quaternion.identity);
-                yield return new WaitForSeconds(enemyWaveProperties.enemySpawnInterval);
+                var enemy = Instantiate(enemyWave.GetEnemyPrefab(), enemySpawnPosition.position, Quaternion.identity);
+                enemy.InitializeEnemyWave(enemyWave);
+                yield return new WaitForSeconds(enemyWave.GetEnemySpawnRate());
+
+                // Until last enemy's pathing is over, do not spawn other waves
+                while (i == (enemyWave.GetNumberOfEnemies() - 1) && enemy.GetIsEnemyPathing() == true)
+                {
+                    yield return null;
+                }
             }
         }
 
-        private void StartEnemySpawn()
-        {
-            StopEnemySpawn();
-            enemySpawnCoroutine = EnemySpawn();
-            StartCoroutine(enemySpawnCoroutine);
-        }
-
-        private void StopEnemySpawn()
+        private void StopSpawnAllEnemies()
         {
             if (enemySpawnCoroutine != null)
             {
@@ -74,40 +59,28 @@ namespace SpaceShooter.Enemy
             }
         }
 
-        private void InitializeWaypoints()
+        private IEnumerator SpawnAllWaves()
         {
-            var waypointCount = Random.Range(enemyWaveProperties.minEnemyWaypoints, enemyWaveProperties.maxEnemyWaypoints + 1);
-
-            for (int i = 0; i < waypointCount; i++)
+            foreach (var currentWave in enemyWave)
             {
-                var waypointPosition = GenerateWaypointPosition(i, waypointCount);
-                enemyPathWaypoints.Add(waypointPosition);
+                yield return StartCoroutine(SpawnAllEnemies(currentWave));
             }
         }
 
-        private Vector3 GenerateWaypointPosition(int index, int totalWaypoints)
+        private void StartSpawnWaves()
         {
-            // Starting position: Spawn enemy on either left or right side of the screen
-            if (index == 0)
-            {
-                return (totalWaypoints % 2 == 0)
-                    ? new Vector3(topRightBorder.x + 1f, Random.Range(0f, topRightBorder.y))
-                    : new Vector3(bottomLeftBorder.x - 1f, Random.Range(0f, topRightBorder.y));
-            }
-
-            // Middle point: Random positions within screen bounds
-            if (index < totalWaypoints - 1)
-            {
-                return new Vector3(Random.Range(bottomLeftBorder.x / 1.5f, topRightBorder.x / 1.5f), Random.Range(0f, topRightBorder.y / 1.5f));
-            }
-
-            // Final position: Top of the screen
-            return new Vector3(Random.Range(bottomLeftBorder.x / 1.5f, topRightBorder.x / 1.5f), topRightBorder.y + 1f);
+            StopSpawnWaves();
+            enemyWaveCoroutine = SpawnAllWaves();
+            StartCoroutine(enemyWaveCoroutine);
         }
 
-        public List<Vector3> TakeWaypoints()
+        private void StopSpawnWaves()
         {
-            return enemyPathWaypoints;
+            if (enemyWaveCoroutine != null)
+            {
+                StopCoroutine(enemyWaveCoroutine);
+                enemyWaveCoroutine = null;
+            }
         }
     }
 }

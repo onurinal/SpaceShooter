@@ -6,16 +6,21 @@ namespace SpaceShooter.Enemy
 {
     public class EnemyPathing : MonoBehaviour
     {
-        [SerializeField] private EnemyWaveProperties enemyWave;
-
-        public List<Vector3> waypoints = new List<Vector3>();
+        private EnemyWave enemyWave;
+        private List<Transform> waypoints = new List<Transform>();
         private IEnumerator enemyPathingCoroutine;
         private int currentWaypointIndex = 0;
+        private bool isEnemyPathing = false;
 
         private void Start()
         {
             InitializeWaypoints();
             StartEnemyPathing();
+        }
+
+        public void InitializeEnemyWave(EnemyWave enemyWave)
+        {
+            this.enemyWave = enemyWave;
         }
 
         private IEnumerator MoveEnemyPathing()
@@ -31,8 +36,8 @@ namespace SpaceShooter.Enemy
 
         private void MoveTowardsNextWaypoint()
         {
-            var targetPosition = waypoints[currentWaypointIndex];
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * enemyWave.enemyMoveSpeed);
+            var targetPosition = waypoints[currentWaypointIndex].position;
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * enemyWave.GetEnemyMoveSpeed());
             if (transform.position == targetPosition)
             {
                 currentWaypointIndex++;
@@ -45,6 +50,7 @@ namespace SpaceShooter.Enemy
             {
                 enemyPathingCoroutine = MoveEnemyPathing();
                 StartCoroutine(enemyPathingCoroutine);
+                isEnemyPathing = true;
             }
         }
 
@@ -54,14 +60,19 @@ namespace SpaceShooter.Enemy
             {
                 StopCoroutine(enemyPathingCoroutine);
                 enemyPathingCoroutine = null;
+                isEnemyPathing = false;
                 Destroy(gameObject);
             }
         }
 
         private void InitializeWaypoints()
         {
-            var enemySpawner = EnemySpawner.Instance;
-            waypoints = enemySpawner.TakeWaypoints();
+            waypoints = enemyWave.InitializeWaypoints();
+        }
+
+        public bool GetIsEnemyPathing()
+        {
+            return isEnemyPathing;
         }
     }
 }

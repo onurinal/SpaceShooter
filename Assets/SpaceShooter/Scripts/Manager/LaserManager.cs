@@ -19,7 +19,7 @@ namespace SpaceShooter.Manager
         {
             if (Instance != null && Instance != this)
             {
-                Destroy(gameObject);
+                Destroy(this.gameObject);
             }
             else
             {
