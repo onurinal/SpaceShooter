@@ -53,6 +53,8 @@ MonoBehaviour:
   bottomCollider: {fileID: 2494227701019386635}
   leftCollider: {fileID: 1701603624413642603}
   rightCollider: {fileID: 8510266199290371764}
+  bottomLeftBorder: {x: 0, y: 0, z: 0}
+  topRightBorder: {x: 0, y: 0, z: 0}
 --- !u!1 &1962079762625067770
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +305,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 12, y: 1}
+  m_Size: {x: 18, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &7490641004451223232
 MonoBehaviour:

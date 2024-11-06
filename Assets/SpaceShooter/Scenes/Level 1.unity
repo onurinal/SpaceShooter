@@ -570,6 +570,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4579361719890044338, guid: 43fc183be79b58141b33a598402b4079, type: 3}
+      propertyPath: laserProperties.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4579361719890044338, guid: 43fc183be79b58141b33a598402b4079, type: 3}
+      propertyPath: laserProperties.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: c04735e183509444db6701238d5a2737, type: 2}
+    - target: {fileID: 4579361719890044338, guid: 43fc183be79b58141b33a598402b4079, type: 3}
+      propertyPath: laserProperties.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4bc04f536a6868a4f86185ea8d146a4e, type: 2}
     - target: {fileID: 7453022385556385006, guid: 43fc183be79b58141b33a598402b4079, type: 3}
       propertyPath: m_Name
       value: LaserManager
@@ -587,6 +599,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1387198366020489324, guid: 42a7a7c23618ff2419a4dff0f75d824b, type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 46394573950823626, guid: b31d135ad9d49ac48b5aa22c73abd05d, type: 3}
     - target: {fileID: 3213240324694468764, guid: 42a7a7c23618ff2419a4dff0f75d824b, type: 3}
       propertyPath: m_Name
       value: GameManager

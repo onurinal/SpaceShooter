@@ -12,8 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 949aa2661cb64ee3a0a9195177e923eb, type: 3}
   m_Name: Wave 3
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4914224787472748087, guid: aca2830ae9401eb4eb92c415364d874b, type: 3}
+  enemyPrefab: {fileID: 7572159752577924248, guid: aca2830ae9401eb4eb92c415364d874b, type: 3}
   pathPrefab: {fileID: 4548109051708014831, guid: 1b3785a91d3c579449ee6357949ee342, type: 3}
   numberOfEnemies: 4
   enemyMoveSpeed: 2
   enemySpawnRate: 0.4
+  enemyLife: 5
+  enemyLaserPrefab: {fileID: 7986777837463516556, guid: 7df4f6c8fe120fe4e95062f01fd20ad5, type: 3}
+  enemyLaserSpeed: 5
+  enemyLaserDamage: 1
+  minEnemyFireRate: 2
+  maxEnemyFireRate: 4

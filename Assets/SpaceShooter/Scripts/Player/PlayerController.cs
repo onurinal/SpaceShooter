@@ -1,4 +1,6 @@
-﻿using SpaceShooter.Manager;
+﻿using System;
+using SpaceShooter.Enemy;
+using SpaceShooter.Manager;
 using UnityEngine;
 
 namespace SpaceShooter.Player
@@ -8,7 +10,6 @@ namespace SpaceShooter.Player
         [SerializeField] private PlayerProperties playerProperties;
         [SerializeField] private Rigidbody2D playerRigidbody2D;
         [SerializeField] private Transform playerShipModel;
-
         [SerializeField] private Transform leftLaserSpawnTransform, rightLaserSpawnTransform;
 
         private Camera mainCamera;
@@ -110,7 +111,6 @@ namespace SpaceShooter.Player
         private void InitializeLaser()
         {
             LaserManager.Instance.Initialize(leftLaserSpawnTransform, rightLaserSpawnTransform);
-            LaserManager.Instance.StartFireLaser();
         }
     }
 }

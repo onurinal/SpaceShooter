@@ -73,7 +73,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2f48502a6dd487fb90a27c0ed9bf8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserProperties: {fileID: 11400000, guid: c04735e183509444db6701238d5a2737, type: 2}
   laserRigidbody2D: {fileID: 1106298043194830753}
 --- !u!1 &5675386898779134378
 GameObject:

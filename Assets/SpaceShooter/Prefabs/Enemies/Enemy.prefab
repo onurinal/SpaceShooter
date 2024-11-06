@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6689699314062275872}
-  - component: {fileID: 6303334193575129056}
-  m_Layer: 0
+  - component: {fileID: 5497983764228816072}
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,14 +26,14 @@ Transform:
   m_GameObject: {fileID: 1340992586651189330}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.93, y: 4.38, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8752193272384882889}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6303334193575129056
+--- !u!114 &5497983764228816072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,11 +42,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1340992586651189330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fec82d9b0d04904921b80c2ec018fea, type: 3}
+  m_Script: {fileID: 11500000, guid: 823c7c82b9ad42d4b70c2307da9f1530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyWave: {fileID: 11400000, guid: 3374c77fb1e026a44856d682492ebd85, type: 2}
-  waypoints: []
 --- !u!1 &2058208083605159391
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +55,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8752193272384882889}
   - component: {fileID: 7194276836530736266}
-  m_Layer: 0
+  - component: {fileID: 4826382078316942676}
+  m_Layer: 8
   m_Name: Enemy Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,3 +130,64 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &4826382078316942676
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058208083605159391}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.04, y: 0.84}
+    newSize: {x: 1.04, y: 0.84}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.26, y: -0.42}
+      - {x: 0.28, y: -0.41}
+      - {x: 0.52, y: 0.03}
+      - {x: 0.52, y: 0.17999999}
+      - {x: 0.29, y: 0.26}
+      - {x: 0.17999999, y: 0.35999998}
+      - {x: 0.049999997, y: 0.42}
+      - {x: -0.08, y: 0.42}
+      - {x: -0.37, y: 0.22}
+      - {x: -0.52, y: 0.17999999}
+      - {x: -0.52, y: 0.02}
+      - {x: -0.26999998, y: -0.41}
+      - {x: -0.26, y: -0.42}
+      - {x: -0.03, y: -0.42}
+      - {x: 0.03, y: -0.35}
+      - {x: 0.049999997, y: -0.42}
+  m_UseDelaunayMesh: 0

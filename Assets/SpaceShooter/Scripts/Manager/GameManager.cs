@@ -5,10 +5,13 @@ namespace SpaceShooter.Manager
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private PlayerController playerShipPrefab;
+        [SerializeField] private PlayerController playerPrefab;
         [SerializeField] private PlayerProperties playerProperties;
 
-        private PlayerController playerController;
+        private int currentPlayerLife;
+        private int currentPlayerHealth;
+
+        private PlayerController player;
 
         public static GameManager Instance;
 
@@ -28,13 +31,50 @@ namespace SpaceShooter.Manager
 
         private void Start()
         {
+            StartGame();
+        }
+
+        private void StartGame()
+        {
             CreateNewShip();
-            playerController.Initialize();
+            currentPlayerLife = playerProperties.playerLife;
+            currentPlayerHealth = playerProperties.playerMaxHealth;
         }
 
         private void CreateNewShip()
         {
-            playerController = Instantiate(playerShipPrefab, playerProperties.playerSpawnPosition, Quaternion.identity);
+            player = Instantiate(playerPrefab, playerProperties.playerSpawnPosition, Quaternion.identity);
+            player.Initialize();
+            LaserManager.Instance.StartFireLaser();
+        }
+
+        private void DestroyShip()
+        {
+            LaserManager.Instance.StopFireLaser();
+            Destroy(player.gameObject);
+        }
+
+        private void RemoveLife()
+        {
+            currentPlayerLife--;
+            if (currentPlayerLife <= 0)
+            {
+                Debug.Log("Game Over");
+                return;
+            }
+
+            currentPlayerHealth = playerProperties.playerMaxHealth; // reset player health after losing life
+            CreateNewShip();
+        }
+
+        public void PlayerTakeDamage(int damage)
+        {
+            currentPlayerHealth -= damage;
+            if (currentPlayerHealth <= 0)
+            {
+                DestroyShip();
+                RemoveLife();
+            }
         }
     }
 }

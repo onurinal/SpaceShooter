@@ -39,14 +39,8 @@ namespace SpaceShooter.Enemy
             for (var i = 0; i < enemyWave.GetNumberOfEnemies(); i++)
             {
                 var enemy = Instantiate(enemyWave.GetEnemyPrefab(), enemySpawnPosition.position, Quaternion.identity);
-                enemy.InitializeEnemyWave(enemyWave);
+                enemy.Initialize(enemyWave);
                 yield return new WaitForSeconds(enemyWave.GetEnemySpawnRate());
-
-                // Until last enemy's pathing is over, do not spawn other waves
-                while (i == (enemyWave.GetNumberOfEnemies() - 1) && enemy.GetIsEnemyPathing() == true)
-                {
-                    yield return null;
-                }
             }
         }
 
@@ -64,6 +58,10 @@ namespace SpaceShooter.Enemy
             foreach (var currentWave in enemyWave)
             {
                 yield return StartCoroutine(SpawnAllEnemies(currentWave));
+
+                // wait 3 second to spawn another wave
+                // change it later after some tests
+                yield return new WaitForSeconds(3f);
             }
         }
 

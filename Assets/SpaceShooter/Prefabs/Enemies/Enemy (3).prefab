@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2314471726772971035}
-  - component: {fileID: 5771345396560807841}
-  m_Layer: 0
+  - component: {fileID: 5958620022403892869}
+  m_Layer: 8
   m_Name: Enemy (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,14 +26,14 @@ Transform:
   m_GameObject: {fileID: 3167405346434542399}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: 0.84, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8065260791178688358}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5771345396560807841
+--- !u!114 &5958620022403892869
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3167405346434542399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fec82d9b0d04904921b80c2ec018fea, type: 3}
+  m_Script: {fileID: 11500000, guid: 823c7c82b9ad42d4b70c2307da9f1530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4315122621891313776
@@ -55,7 +55,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8065260791178688358}
   - component: {fileID: 1690141239813247518}
-  m_Layer: 0
+  - component: {fileID: 6653532426762322605}
+  m_Layer: 8
   m_Name: Enemy Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,3 +130,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &6653532426762322605
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4315122621891313776}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.97, y: 0.84}
+    newSize: {x: 1.04, y: 0.84}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.48499998, y: 0.26999998}
+      - {x: 0.48499998, y: 0.42}
+      - {x: 0.275, y: 0.42}
+      - {x: 0.145, y: 0.34}
+      - {x: 0.105, y: 0.29999998}
+      - {x: -0.035, y: 0.29999998}
+      - {x: -0.145, y: 0.32999998}
+      - {x: -0.255, y: 0.41}
+      - {x: -0.285, y: 0.42}
+      - {x: -0.48499998, y: 0.42}
+      - {x: -0.48499998, y: 0.29999998}
+      - {x: -0.42499998, y: 0.07}
+      - {x: -0.305, y: -0.31}
+      - {x: -0.275, y: -0.34}
+      - {x: -0.145, y: -0.42}
+      - {x: 0.13499999, y: -0.42}
+      - {x: 0.185, y: -0.37}
+      - {x: 0.285, y: -0.34}
+      - {x: 0.305, y: -0.29999998}
+  m_UseDelaunayMesh: 0

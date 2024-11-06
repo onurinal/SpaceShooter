@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using SpaceShooter.Lasers;
 using UnityEngine;
 
@@ -6,8 +7,7 @@ namespace SpaceShooter.Manager
 {
     public class LaserManager : MonoBehaviour
     {
-        [SerializeField] private LaserProperties laserProperties;
-        [SerializeField] private Laser initialLaserPrefab;
+        [SerializeField] private List<LaserProperties> laserProperties;
         private Transform leftLaserSpawnTransform, rightLaserSpawnTransform;
         private IEnumerator laserCoroutine;
         private bool isFiring;
@@ -36,6 +36,9 @@ namespace SpaceShooter.Manager
 
             this.leftLaserSpawnTransform = leftLaserSpawnTransform;
             this.rightLaserSpawnTransform = rightLaserSpawnTransform;
+
+            // START SHOOTING
+            StartFireLaser();
         }
 
         private IEnumerator FireLaser()
@@ -43,9 +46,12 @@ namespace SpaceShooter.Manager
             isFiring = true;
             while (isFiring)
             {
-                var leftLaser = Instantiate(initialLaserPrefab, leftLaserSpawnTransform.position, Quaternion.identity);
-                var rightLaser = Instantiate(initialLaserPrefab, rightLaserSpawnTransform.position, Quaternion.identity);
-                yield return new WaitForSeconds(laserProperties.fireInterval);
+                // For now didn't have many laser, that's why after some new lasers you should create a new method to select the specific laser
+                var leftLaser = Instantiate(laserProperties[0].laserPrefab, leftLaserSpawnTransform.position, Quaternion.identity);
+                leftLaser.Initialize(laserProperties[0]);
+                var rightLaser = Instantiate(laserProperties[0].laserPrefab, rightLaserSpawnTransform.position, Quaternion.identity);
+                rightLaser.Initialize(laserProperties[0]);
+                yield return new WaitForSeconds(laserProperties[0].fireInterval);
             }
         }
 
@@ -56,7 +62,7 @@ namespace SpaceShooter.Manager
             StartCoroutine(laserCoroutine);
         }
 
-        private void StopFireLaser()
+        public void StopFireLaser()
         {
             if (laserCoroutine != null)
             {

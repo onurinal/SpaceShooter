@@ -4,23 +4,20 @@ using UnityEngine;
 
 namespace SpaceShooter.Enemy
 {
-    public class EnemyPathing : MonoBehaviour
+    public class EnemyPathing
     {
+        private TheEnemy enemy;
         private EnemyWave enemyWave;
         private List<Transform> waypoints = new List<Transform>();
         private IEnumerator enemyPathingCoroutine;
         private int currentWaypointIndex = 0;
-        private bool isEnemyPathing = false;
 
-        private void Start()
+        public void Initialize(TheEnemy enemy, EnemyWave enemyWave)
         {
+            this.enemy = enemy;
+            this.enemyWave = enemyWave;
             InitializeWaypoints();
             StartEnemyPathing();
-        }
-
-        public void InitializeEnemyWave(EnemyWave enemyWave)
-        {
-            this.enemyWave = enemyWave;
         }
 
         private IEnumerator MoveEnemyPathing()
@@ -37,8 +34,8 @@ namespace SpaceShooter.Enemy
         private void MoveTowardsNextWaypoint()
         {
             var targetPosition = waypoints[currentWaypointIndex].position;
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * enemyWave.GetEnemyMoveSpeed());
-            if (transform.position == targetPosition)
+            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, targetPosition, Time.deltaTime * enemyWave.GetEnemyMoveSpeed());
+            if (enemy.transform.position == targetPosition)
             {
                 currentWaypointIndex++;
             }
@@ -49,8 +46,7 @@ namespace SpaceShooter.Enemy
             if (enemyPathingCoroutine == null)
             {
                 enemyPathingCoroutine = MoveEnemyPathing();
-                StartCoroutine(enemyPathingCoroutine);
-                isEnemyPathing = true;
+                enemy.StartCoroutine(enemyPathingCoroutine);
             }
         }
 
@@ -58,21 +54,15 @@ namespace SpaceShooter.Enemy
         {
             if (enemyPathingCoroutine != null)
             {
-                StopCoroutine(enemyPathingCoroutine);
+                enemy.StopCoroutine(enemyPathingCoroutine);
                 enemyPathingCoroutine = null;
-                isEnemyPathing = false;
-                Destroy(gameObject);
+                enemy.DestroyEnemy();
             }
         }
 
         private void InitializeWaypoints()
         {
             waypoints = enemyWave.InitializeWaypoints();
-        }
-
-        public bool GetIsEnemyPathing()
-        {
-            return isEnemyPathing;
         }
     }
 }
