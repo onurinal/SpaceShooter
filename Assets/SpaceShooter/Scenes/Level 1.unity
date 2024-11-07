@@ -650,7 +650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7207546, g: 0.7207546, b: 0.7207546, a: 0.0627451}
+  m_Color: {r: 0.7207546, g: 0.7207546, b: 0.7207546, a: 0.007843138}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -804,7 +804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.33018857, g: 0.66512096, b: 1, a: 0.039215688}
+  m_Color: {r: 0.33018857, g: 0.66512096, b: 1, a: 0.019607844}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -983,7 +983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.33018857, g: 0.66512096, b: 1, a: 0.039215688}
+  m_Color: {r: 0.33018857, g: 0.66512096, b: 1, a: 0.019607844}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1355,6 +1355,14 @@ PrefabInstance:
     - target: {fileID: 914179032125700964, guid: f6e2be718effbbc48bdf734cecfef698, type: 3}
       propertyPath: m_Name
       value: SpaceManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1324772334873692373, guid: f6e2be718effbbc48bdf734cecfef698, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6371028381057169522, guid: f6e2be718effbbc48bdf734cecfef698, type: 3}
+      propertyPath: scrollSpeed
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 6640898669778649713, guid: f6e2be718effbbc48bdf734cecfef698, type: 3}
       propertyPath: m_LocalPosition.x
