@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using SpaceShooter.Manager;
 using UnityEngine;
 
 namespace SpaceShooter.Enemy
@@ -12,12 +14,12 @@ namespace SpaceShooter.Enemy
         private IEnumerator laserCoroutine;
         private bool isFiring;
 
-        public void Initialize(EnemyWave enemyWave)
+        public void Initialize(EnemyWave enemyWave, List<Transform> waypoints)
         {
             this.enemyWave = enemyWave;
             enemyPathing = new EnemyPathing();
-            enemyPathing.Initialize(this, enemyWave);
-            currentLife = this.enemyWave.GetEnemyLife();
+            enemyPathing.Initialize(this, enemyWave, waypoints);
+            currentLife = this.enemyWave.EnemyLife;
 
             StartFireLaser();
         }
@@ -30,6 +32,7 @@ namespace SpaceShooter.Enemy
                 if (currentLife <= 0)
                 {
                     DestroyEnemy();
+                    UIManager.Instance.AddToScore(enemyWave.EnemyPoint);
                 }
             }
         }
@@ -42,12 +45,12 @@ namespace SpaceShooter.Enemy
 
         private IEnumerator FireLaser()
         {
-            var minFireRate = enemyWave.GetMinEnemyFireRate();
-            var maxFireRate = enemyWave.GetMaxEnemyFireRate();
+            var minFireRate = enemyWave.MinEnemyFireRate;
+            var maxFireRate = enemyWave.MaxEnemyFireRate;
             while (isFiring)
             {
                 yield return new WaitForSeconds(Random.Range(minFireRate, maxFireRate));
-                var laser = Instantiate(enemyWave.GetEnemyLaserPrefab(), transform.position, Quaternion.identity);
+                var laser = Instantiate(enemyWave.EnemyLaserPrefab, transform.position, Quaternion.identity);
                 laser.Initialize(enemyWave);
             }
         }

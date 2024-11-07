@@ -51,7 +51,7 @@ namespace SpaceShooter.Player
             if (Input.GetMouseButton(0)) // Check if the left mouse button is held down
             {
                 var direction = currentTouchPosition - previousTouchPosition;
-                var targetPosition = transform.position + direction * (playerProperties.mouseMoveSpeed * Time.deltaTime);
+                var targetPosition = transform.position + direction * (playerProperties.MouseMoveSpeed * Time.deltaTime);
                 targetPosition = ClampShipToScreen(targetPosition);
                 transform.position = targetPosition;
             }
@@ -72,7 +72,7 @@ namespace SpaceShooter.Player
                 else if (touch.phase == TouchPhase.Moved)
                 {
                     var direction = touchPosition - previousTouchPosition;
-                    var targetPosition = transform.position + direction * (Time.deltaTime * playerProperties.touchMoveSpeed);
+                    var targetPosition = transform.position + direction * (Time.deltaTime * playerProperties.TouchMoveSpeed);
                     targetPosition = ClampShipToScreen(targetPosition);
                     transform.position = targetPosition;
                     previousTouchPosition = touchPosition;
@@ -84,7 +84,7 @@ namespace SpaceShooter.Player
         private void MoveShipWithKeyboard()
         {
             var direction = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0f).normalized;
-            var targetPosition = transform.position + direction * (Time.deltaTime * playerProperties.keyboardMoveSpeed);
+            var targetPosition = transform.position + direction * (Time.deltaTime * playerProperties.KeyboardMoveSpeed);
             targetPosition = ClampShipToScreen(targetPosition);
             transform.position = targetPosition;
         }

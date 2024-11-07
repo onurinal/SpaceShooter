@@ -12,7 +12,7 @@ namespace SpaceShooter.Enemy
         public void Initialize(EnemyWave enemyWave)
         {
             this.enemyWave = enemyWave;
-            myRigidbody2D.velocity = new Vector2(0f, -enemyWave.GetEnemyLaserSpeed());
+            myRigidbody2D.velocity = new Vector2(0f, -enemyWave.EnemyLaserSpeed);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -20,7 +20,7 @@ namespace SpaceShooter.Enemy
             var player = collision.GetComponentInParent<PlayerController>();
             if (player != null)
             {
-                GameManager.Instance.PlayerTakeDamage(enemyWave.GetEnemyLaserDamage());
+                GameManager.Instance.PlayerTakeDamage(enemyWave.EnemyLaserDamage);
                 Destroy(gameObject);
             }
         }

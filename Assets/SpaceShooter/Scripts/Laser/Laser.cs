@@ -16,7 +16,7 @@ namespace SpaceShooter.Lasers
 
         private void InitializeLaserSpeed()
         {
-            laserRigidbody2D.velocity = laserProperties.speed;
+            laserRigidbody2D.velocity = laserProperties.LaserSpeed;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -24,7 +24,7 @@ namespace SpaceShooter.Lasers
             var enemy = collision.gameObject.GetComponentInParent<TheEnemy>();
             if (enemy != null)
             {
-                enemy.TakeDamage(laserProperties.laserDamage);
+                enemy.TakeDamage(laserProperties.LaserDamage);
                 Destroy(gameObject);
             }
         }

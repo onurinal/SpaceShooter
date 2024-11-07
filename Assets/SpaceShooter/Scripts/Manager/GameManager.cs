@@ -37,13 +37,18 @@ namespace SpaceShooter.Manager
         private void StartGame()
         {
             CreateNewShip();
-            currentPlayerLife = playerProperties.playerLife;
-            currentPlayerHealth = playerProperties.playerMaxHealth;
+            ResetPlayerLifeAndMaxHealth();
+        }
+
+        private void ResetPlayerLifeAndMaxHealth()
+        {
+            currentPlayerLife = playerProperties.PlayerLife;
+            currentPlayerHealth = playerProperties.PlayerMaxHealth;
         }
 
         private void CreateNewShip()
         {
-            player = Instantiate(playerPrefab, playerProperties.playerSpawnPosition, Quaternion.identity);
+            player = Instantiate(playerPrefab, playerProperties.PlayerSpawnPosition, Quaternion.identity);
             player.Initialize();
             LaserManager.Instance.StartFireLaser();
         }
@@ -56,6 +61,7 @@ namespace SpaceShooter.Manager
 
         private void RemoveLife()
         {
+            RemoveLifeIcon();
             currentPlayerLife--;
             if (currentPlayerLife <= 0)
             {
@@ -63,8 +69,13 @@ namespace SpaceShooter.Manager
                 return;
             }
 
-            currentPlayerHealth = playerProperties.playerMaxHealth; // reset player health after losing life
+            currentPlayerHealth = playerProperties.PlayerMaxHealth; // reset player health after losing life
             CreateNewShip();
+        }
+
+        private void RemoveLifeIcon()
+        {
+            UIManager.Instance.RemoveLifeIcon(currentPlayerLife);
         }
 
         public void PlayerTakeDamage(int damage)

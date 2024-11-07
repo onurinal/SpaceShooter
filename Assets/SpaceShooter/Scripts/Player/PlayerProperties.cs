@@ -5,12 +5,21 @@ namespace SpaceShooter.Player
     [CreateAssetMenu(fileName = "PlayerProperties", menuName = "SpaceShooter/Player/Create New PlayerProperties")]
     public class PlayerProperties : ScriptableObject
     {
-        [Header("Movement parameters")] public float mouseMoveSpeed = 90f;
-        public float keyboardMoveSpeed = 14f;
-        public float touchMoveSpeed = 60f;
+        [Header("Movement parameters")] [SerializeField]
+        private float mouseMoveSpeed = 90f;
 
-        public Vector3 playerSpawnPosition;
-        public int playerMaxHealth = 3;
-        public int playerLife = 3;
+        [SerializeField] private float keyboardMoveSpeed = 14f;
+        [SerializeField] private float touchMoveSpeed = 60f;
+
+        [SerializeField] private Vector3 playerSpawnPosition;
+        [SerializeField] private int playerMaxHealth = 3;
+        [SerializeField] private int playerLife = 3;
+
+        public float MouseMoveSpeed => mouseMoveSpeed;
+        public float KeyboardMoveSpeed => keyboardMoveSpeed;
+        public float TouchMoveSpeed => touchMoveSpeed;
+        public Vector3 PlayerSpawnPosition => playerSpawnPosition;
+        public int PlayerMaxHealth => playerMaxHealth;
+        public int PlayerLife => playerLife;
     }
 }

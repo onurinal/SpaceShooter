@@ -12,6 +12,7 @@ namespace SpaceShooter.Enemy
         [SerializeField] private float enemyMoveSpeed = 4f;
         [SerializeField] private float enemySpawnRate = 0.4f;
         [SerializeField] private int enemyLife;
+        [SerializeField] private int enemyPoint;
 
         [Header("Enemy Shoot Parameters")] [SerializeField]
         private EnemyLaser enemyLaserPrefab;
@@ -21,30 +22,19 @@ namespace SpaceShooter.Enemy
         [SerializeField] private float minEnemyFireRate;
         [SerializeField] private float maxEnemyFireRate;
 
-        public TheEnemy GetEnemyPrefab()
-        {
-            return enemyPrefab;
-        }
+        public TheEnemy EnemyPrefab => enemyPrefab;
+        public int NumberOfEnemies => numberOfEnemies;
+        public float EnemyMoveSpeed => enemyMoveSpeed;
+        public float EnemySpawnRate => enemySpawnRate;
+        public int EnemyLife => enemyLife;
+        public EnemyLaser EnemyLaserPrefab => enemyLaserPrefab;
+        public float EnemyLaserSpeed => enemyLaserSpeed;
+        public int EnemyLaserDamage => enemyLaserDamage;
+        public float MinEnemyFireRate => minEnemyFireRate;
+        public float MaxEnemyFireRate => maxEnemyFireRate;
 
-        public EnemyLaser GetEnemyLaserPrefab()
-        {
-            return enemyLaserPrefab;
-        }
+        public int EnemyPoint => enemyPoint;
 
-        public int GetNumberOfEnemies()
-        {
-            return numberOfEnemies;
-        }
-
-        public float GetEnemyMoveSpeed()
-        {
-            return enemyMoveSpeed;
-        }
-
-        public float GetEnemySpawnRate()
-        {
-            return enemySpawnRate;
-        }
 
         public List<Transform> InitializeWaypoints()
         {
@@ -57,31 +47,6 @@ namespace SpaceShooter.Enemy
             }
 
             return waypoints;
-        }
-
-        public int GetEnemyLife()
-        {
-            return enemyLife;
-        }
-
-        public float GetEnemyLaserSpeed()
-        {
-            return enemyLaserSpeed;
-        }
-
-        public float GetMinEnemyFireRate()
-        {
-            return minEnemyFireRate;
-        }
-
-        public float GetMaxEnemyFireRate()
-        {
-            return maxEnemyFireRate;
-        }
-
-        public int GetEnemyLaserDamage()
-        {
-            return enemyLaserDamage;
         }
     }
 }

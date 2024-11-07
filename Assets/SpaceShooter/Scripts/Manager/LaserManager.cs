@@ -47,11 +47,11 @@ namespace SpaceShooter.Manager
             while (isFiring)
             {
                 // For now didn't have many laser, that's why after some new lasers you should create a new method to select the specific laser
-                var leftLaser = Instantiate(laserProperties[0].laserPrefab, leftLaserSpawnTransform.position, Quaternion.identity);
+                var leftLaser = Instantiate(laserProperties[0].LaserPrefab, leftLaserSpawnTransform.position, Quaternion.identity);
                 leftLaser.Initialize(laserProperties[0]);
-                var rightLaser = Instantiate(laserProperties[0].laserPrefab, rightLaserSpawnTransform.position, Quaternion.identity);
+                var rightLaser = Instantiate(laserProperties[0].LaserPrefab, rightLaserSpawnTransform.position, Quaternion.identity);
                 rightLaser.Initialize(laserProperties[0]);
-                yield return new WaitForSeconds(laserProperties[0].fireInterval);
+                yield return new WaitForSeconds(laserProperties[0].FireInterval);
             }
         }
 

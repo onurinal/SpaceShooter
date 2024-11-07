@@ -12,11 +12,11 @@ namespace SpaceShooter.Enemy
         private IEnumerator enemyPathingCoroutine;
         private int currentWaypointIndex = 0;
 
-        public void Initialize(TheEnemy enemy, EnemyWave enemyWave)
+        public void Initialize(TheEnemy enemy, EnemyWave enemyWave, List<Transform> waypoints)
         {
             this.enemy = enemy;
             this.enemyWave = enemyWave;
-            InitializeWaypoints();
+            this.waypoints = waypoints;
             StartEnemyPathing();
         }
 
@@ -34,7 +34,7 @@ namespace SpaceShooter.Enemy
         private void MoveTowardsNextWaypoint()
         {
             var targetPosition = waypoints[currentWaypointIndex].position;
-            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, targetPosition, Time.deltaTime * enemyWave.GetEnemyMoveSpeed());
+            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, targetPosition, Time.deltaTime * enemyWave.EnemyMoveSpeed);
             if (enemy.transform.position == targetPosition)
             {
                 currentWaypointIndex++;
@@ -58,11 +58,6 @@ namespace SpaceShooter.Enemy
                 enemyPathingCoroutine = null;
                 enemy.DestroyEnemy();
             }
-        }
-
-        private void InitializeWaypoints()
-        {
-            waypoints = enemyWave.InitializeWaypoints();
         }
     }
 }

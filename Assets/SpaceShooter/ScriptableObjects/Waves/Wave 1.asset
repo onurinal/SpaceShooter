@@ -18,6 +18,7 @@ MonoBehaviour:
   enemyMoveSpeed: 2
   enemySpawnRate: 0.4
   enemyLife: 5
+  enemyPoint: 100
   enemyLaserPrefab: {fileID: 7986777837463516556, guid: 7df4f6c8fe120fe4e95062f01fd20ad5, type: 3}
   enemyLaserSpeed: 5
   enemyLaserDamage: 1

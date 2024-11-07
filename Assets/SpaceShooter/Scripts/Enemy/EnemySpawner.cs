@@ -35,12 +35,13 @@ namespace SpaceShooter.Enemy
 
         private IEnumerator SpawnAllEnemies(EnemyWave enemyWave)
         {
-            var enemySpawnPosition = enemyWave.InitializeWaypoints()[0];
-            for (var i = 0; i < enemyWave.GetNumberOfEnemies(); i++)
+            var waypoints = enemyWave.InitializeWaypoints();
+            var enemySpawnPosition = waypoints[0].position;
+            for (var i = 0; i < enemyWave.NumberOfEnemies; i++)
             {
-                var enemy = Instantiate(enemyWave.GetEnemyPrefab(), enemySpawnPosition.position, Quaternion.identity);
-                enemy.Initialize(enemyWave);
-                yield return new WaitForSeconds(enemyWave.GetEnemySpawnRate());
+                var enemy = Instantiate(enemyWave.EnemyPrefab, enemySpawnPosition, Quaternion.identity);
+                enemy.Initialize(enemyWave, waypoints);
+                yield return new WaitForSeconds(enemyWave.EnemySpawnRate);
             }
         }
 
