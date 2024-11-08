@@ -41,6 +41,7 @@ namespace SpaceShooter.Enemy
         {
             StopFireLaser();
             Destroy(gameObject);
+            CreateExplosionEffect();
         }
 
         private IEnumerator FireLaser()
@@ -71,6 +72,12 @@ namespace SpaceShooter.Enemy
                 laserCoroutine = null;
                 isFiring = false;
             }
+        }
+
+        private void CreateExplosionEffect()
+        {
+            var explosion = Instantiate(enemyWave.ExplosionPrefab, transform.position, Quaternion.identity);
+            Destroy(explosion, 1f);
         }
     }
 }

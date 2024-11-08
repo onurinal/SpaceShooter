@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 
 namespace SpaceShooter.Manager
 {
-    public class SceneManagement : MonoBehaviour
+    public class SceneLoader : MonoBehaviour
     {
-        public static SceneManagement Instance;
+        public static SceneLoader Instance;
 
         private void Awake()
         {

@@ -8,6 +8,7 @@ namespace SpaceShooter.Enemy
     {
         [SerializeField] private TheEnemy enemyPrefab;
         [SerializeField] private GameObject pathPrefab;
+        [SerializeField] private GameObject explosionPrefab;
         [SerializeField] private int numberOfEnemies = 5;
         [SerializeField] private float enemyMoveSpeed = 4f;
         [SerializeField] private float enemySpawnRate = 0.4f;
@@ -34,6 +35,8 @@ namespace SpaceShooter.Enemy
         public float MaxEnemyFireRate => maxEnemyFireRate;
 
         public int EnemyPoint => enemyPoint;
+
+        public GameObject ExplosionPrefab => explosionPrefab;
 
 
         public List<Transform> InitializeWaypoints()
