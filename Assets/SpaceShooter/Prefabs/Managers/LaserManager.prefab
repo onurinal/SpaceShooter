@@ -47,3 +47,5 @@ MonoBehaviour:
   laserProperties:
   - {fileID: 11400000, guid: c04735e183509444db6701238d5a2737, type: 2}
   - {fileID: 11400000, guid: 4bc04f536a6868a4f86185ea8d146a4e, type: 2}
+  laserSound: {fileID: 8300000, guid: 4c9c7846ec1471e4e8eb41f42d31d2b4, type: 3}
+  laserVolume: 0.5

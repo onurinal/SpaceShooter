@@ -12,6 +12,8 @@ namespace SpaceShooter.Manager
         private IEnumerator laserCoroutine;
         private bool isFiring;
 
+        [SerializeField] private AudioClip laserSound;
+        [SerializeField] [Range(0f, 1f)] private float laserVolume = 0.5f;
 
         public static LaserManager Instance;
 
@@ -46,13 +48,19 @@ namespace SpaceShooter.Manager
             isFiring = true;
             while (isFiring)
             {
-                // For now didn't have many laser, that's why after some new lasers you should create a new method to select the specific laser
-                var leftLaser = Instantiate(laserProperties[0].LaserPrefab, leftLaserSpawnTransform.position, Quaternion.identity);
-                leftLaser.Initialize(laserProperties[0]);
-                var rightLaser = Instantiate(laserProperties[0].LaserPrefab, rightLaserSpawnTransform.position, Quaternion.identity);
-                rightLaser.Initialize(laserProperties[0]);
+                InstantiateLasers();
+                PlayLaserSound();
                 yield return new WaitForSeconds(laserProperties[0].FireInterval);
             }
+        }
+
+        private void InstantiateLasers()
+        {
+            // For now didn't have many laser, that's why after some new lasers you should create a new method to select the specific laser
+            var leftLaser = Instantiate(laserProperties[0].LaserPrefab, leftLaserSpawnTransform.position, Quaternion.identity);
+            leftLaser.Initialize(laserProperties[0]);
+            var rightLaser = Instantiate(laserProperties[0].LaserPrefab, rightLaserSpawnTransform.position, Quaternion.identity);
+            rightLaser.Initialize(laserProperties[0]);
         }
 
         public void StartFireLaser()
@@ -71,6 +79,11 @@ namespace SpaceShooter.Manager
             }
 
             isFiring = false;
+        }
+
+        private void PlayLaserSound()
+        {
+            AudioSource.PlayClipAtPoint(laserSound, transform.position, laserVolume);
         }
     }
 }
